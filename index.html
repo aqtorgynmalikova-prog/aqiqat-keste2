@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Логикалық операциялар — ақиқат кестесі</title>
+<style>
+:root{--purple:#6846d8;--blue:#2878d7;--ink:#182544;--muted:#60708f;--line:#dbe4f5;--bg:#f5f7ff;--green:#16865b;--red:#c43e52}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#f7f6ff,#eef7ff);font-family:Arial,"Helvetica Neue",sans-serif;color:var(--ink)}
+.wrap{max-width:1050px;margin:0 auto;padding:22px 16px 40px}
+header{background:white;border:1px solid var(--line);border-radius:22px;padding:25px;box-shadow:0 8px 25px #3344770d}
+h1{margin:0 0 8px;color:#4523a5;font-size:clamp(25px,4vw,38px)}
+.sub{margin:0;color:var(--muted);line-height:1.5}
+.goal{margin-top:16px;background:#f0edff;padding:12px 15px;border-radius:12px;color:#4829a7;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.tab{border:1px solid #d9d1ff;background:white;color:#5036ac;border-radius:12px;padding:11px 15px;font-weight:700;cursor:pointer}
+.tab.active{background:var(--purple);color:white}
+.panel{display:none;background:white;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 25px #3344770d}
+.panel.active{display:block}
+h2{margin:0 0 12px;font-size:24px}
+p{line-height:1.55}
+.rulegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}
+.rule{border:1px solid var(--line);border-radius:15px;padding:16px;background:#fbfcff}
+.rule strong{display:block;color:#4b2caf;font-size:20px;margin-bottom:7px}
+.badge{display:inline-block;padding:5px 9px;border-radius:8px;background:#eef3ff;font-weight:700}
+table{border-collapse:collapse;width:100%;max-width:650px;margin:15px 0}
+th,td{border:1px solid #cdd8ed;text-align:center;padding:10px}
+th{background:#edeaff;color:#4523a5}
+td input,td select{width:62px;max-width:100%;font-size:17px;text-align:center;padding:7px;border:1px solid #bcc9e3;border-radius:8px;background:white;color:var(--ink)}
+td select{width:70px}
+.controls{display:flex;gap:9px;flex-wrap:wrap;margin:15px 0}
+button.action{border:0;border-radius:11px;padding:11px 16px;font-weight:700;cursor:pointer;background:var(--purple);color:white}
+button.secondary{background:#eaf1ff;color:#234e9c}
+button.green{background:var(--green)}
+.feedback{margin:12px 0;padding:12px 14px;border-radius:12px;display:none;line-height:1.5}
+.feedback.show{display:block}.feedback.ok{background:#e7f8ef;color:#126443}.feedback.no{background:#fff0f1;color:#a32b40}.feedback.info{background:#eef5ff;color:#214c91}
+.small{font-size:14px;color:var(--muted)}
+.steps{display:none;background:#f7f5ff;border-left:4px solid var(--purple);padding:13px 16px;border-radius:10px;margin-top:12px;line-height:1.7}
+.steps.show{display:block}
+.score{font-weight:700;color:#4523a5}
+.question{border:1px solid var(--line);border-radius:15px;padding:15px;margin:12px 0;background:#fcfdff}
+.question label{display:inline-flex;gap:6px;align-items:center;margin:7px 12px 4px 0}
+.question input[type=radio]{accent-color:var(--purple)}
+footer{text-align:center;color:var(--muted);padding:22px 8px 0;font-size:14px}
+@media(max-width:600px){.wrap{padding:12px 10px 28px}header,.panel{padding:17px}.tab{flex:1;padding:10px 8px;font-size:13px}th,td{padding:7px 4px}td input{width:48px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Логикалық операциялар</h1>
+  <p class="sub">Ақиқат кестесін құруды үйрен: ережені оқы, кестені өзің толтыр, жауабыңды тексер.</p>
+  <div class="goal">🎯 Мақсат: ақиқат кестесін құра алу және есепті қалай дұрыс шығару керегін түсіну.</div>
+</header>
+
+<nav class="tabs" aria-label="Бөлімдер">
+  <button class="tab active" data-tab="learn">1. Ережелер</button>
+  <button class="tab" data-tab="practice">2. Кестені толтыр</button>
+  <button class="tab" data-tab="challenge">3. Шағын тест</button>
+</nav>
+
+<section class="panel active" id="learn">
+  <h2>Ең алдымен ережені түсініп ал</h2>
+  <p><span class="badge">1 = ақиқат</span> &nbsp; <span class="badge">0 = жалған</span></p>
+  <div class="rulegrid">
+    <div class="rule"><strong>ЖӘНЕ (AND) — ∧</strong>Екі мән де 1 болса ғана нәтиже 1 болады.<br><span class="small">Мысал: 1 ∧ 1 = 1</span></div>
+    <div class="rule"><strong>НЕМЕСЕ (OR) — ∨</strong>Кемінде бір мән 1 болса, нәтиже 1 болады.<br><span class="small">Мысал: 1 ∨ 0 = 1</span></div>
+    <div class="rule"><strong>ЕМЕС (NOT) — ¬</strong>Мәнді керісінше өзгертеді: 0→1, 1→0.<br><span class="small">Мысал: ¬0 = 1</span></div>
+  </div>
+  <h2>Кестені қалай құрамыз?</h2>
+  <ol>
+    <li>Айнымалыларды жазамыз: A және B.</li>
+    <li>Екі айнымалы болса, барлық мүмкін жұпты жазамыз: 00, 01, 10, 11.</li>
+    <li>Әр жолда өрнекті амалдардың ережесімен есептейміз.</li>
+    <li>Нәтижені F бағанына жазамыз.</li>
+  </ol>
+  <p class="small">Есте сақта: n айнымалысы бар ақиқат кестесінде 2ⁿ жол болады. Мысалы, 2 айнымалы → 2² = 4 жол; 3 айнымалы → 2³ = 8 жол.</p>
+  <button class="action" onclick="goTab('practice')">Кестені толтыруға өту →</button>
+</section>
+
+<section class="panel" id="practice">
+  <h2>Тапсырма: бос ұяшықтарды толтыр</h2>
+  <p>Әр кестедегі F бағанына 0 немесе 1 таңда. Соңында <b>«Жауапты тексеру»</b> батырмасын бас.</p>
+  <div class="question">
+    <h3>1-тапсырма. F = A ∧ B</h3>
+    <p class="small">Ереже: екі мән де 1 болғанда ғана F = 1.</p>
+    <table><thead><tr><th>A</th><th>B</th><th>F</th></tr></thead><tbody id="andRows"></tbody></table>
+    <div class="controls"><button class="action" onclick="checkTable('and')">Жауапты тексеру</button><button class="action secondary" onclick="showSteps('and')">Шешу жолын көрсету</button><button class="action secondary" onclick="resetTable('and')">Қайта бастау</button></div>
+    <div id="andFeedback" class="feedback"></div><div id="andSteps" class="steps">00 → кемінде біреуі 0, сондықтан F=0.<br>01 → A=0, сондықтан F=0.<br>10 → B=0, сондықтан F=0.<br>11 → екі мән де 1, сондықтан F=1.</div>
+  </div>
+  <div class="question">
+    <h3>2-тапсырма. F = A ∨ B</h3>
+    <p class="small">Ереже: кемінде бір мән 1 болса, F = 1.</p>
+    <table><thead><tr><th>A</th><th>B</th><th>F</th></tr></thead><tbody id="orRows"></tbody></table>
+    <div class="controls"><button class="action" onclick="checkTable('or')">Жауапты тексеру</button><button class="action secondary" onclick="showSteps('or')">Шешу жолын көрсету</button><button class="action secondary" onclick="resetTable('or')">Қайта бастау</button></div>
+    <div id="orFeedback" class="feedback"></div><div id="orSteps" class="steps">00 → екеуі де 0, F=0.<br>01 → B=1, F=1.<br>10 → A=1, F=1.<br>11 → екеуінің кемінде бірі 1, F=1.</div>
+  </div>
+  <div class="question">
+    <h3>3-тапсырма. F = ¬A</h3>
+    <p class="small">Ереже: A мәнін керісінше өзгерт.</p>
+    <table><thead><tr><th>A</th><th>F</th></tr></thead><tbody id="notRows"></tbody></table>
+    <div class="controls"><button class="action" onclick="checkTable('not')">Жауапты тексеру</button><button class="action secondary" onclick="showSteps('not')">Шешу жолын көрсету</button><button class="action secondary" onclick="resetTable('not')">Қайта бастау</button></div>
+    <div id="notFeedback" class="feedback"></div><div id="notSteps" class="steps">A=0 болса, F=1. A=1 болса, F=0.</div>
+  </div>
+  <div class="question">
+    <h3>4-тапсырма. F = (A ∧ B) ∨ ¬C</h3>
+    <p class="small">Алдымен жақша ішін есепте, кейін ¬C мәнін тап, соңында НЕМЕСЕ амалын орында.</p>
+    <table><thead><tr><th>A</th><th>B</th><th>C</th><th>F</th></tr></thead><tbody id="complexRows"></tbody></table>
+    <div class="controls"><button class="action" onclick="checkTable('complex')">Жауапты тексеру</button><button class="action secondary" onclick="showSteps('complex')">Шешу жолын көрсету</button><button class="action secondary" onclick="resetTable('complex')">Қайта бастау</button></div>
+    <div id="complexFeedback" class="feedback"></div><div id="complexSteps" class="steps">Әр жолда: 1) A ∧ B есепте; 2) C-ні терістеп ¬C тап; 3) екі нәтижеге НЕМЕСЕ амалын қолдан. Егер C=0 болса, ¬C=1, сондықтан F=1. Егер C=1 болса, ¬C=0, сондықтан F=A∧B.</div>
+  </div>
+</section>
+
+<section class="panel" id="challenge">
+  <h2>Өзіңді тексер!</h2>
+  <p>Әр сұрақтың бір дұрыс жауабы бар. Таңдап болған соң нәтижені тексер.</p>
+  <div id="quiz"></div>
+  <div class="controls"><button class="action" onclick="checkQuiz()">Тестті тексеру</button><button class="action secondary" onclick="resetQuiz()">Қайта бастау</button></div>
+  <div id="quizFeedback" class="feedback"></div>
+</section>
+<footer>💜 Логиканы түсіну — есепті жаттап алудан емес, әр қадамды түсіндіруден басталады.</footer>
+</div>
+<script>
+const pairs=[[0,0],[0,1],[1,0],[1,1]];
+const triples=[]; for(let a=0;a<=1;a++)for(let b=0;b<=1;b++)for(let c=0;c<=1;c++)triples.push([a,b,c]);
+const configs={
+ and:{rows:pairs,heads:['A','B','F'],fn:v=>v[0]&&v[1]?1:0},
+ or:{rows:pairs,heads:['A','B','F'],fn:v=>v[0]||v[1]?1:0},
+ not:{rows:[[0],[1]],heads:['A','F'],fn:v=>v[0]?0:1},
+ complex:{rows:triples,heads:['A','B','C','F'],fn:v=>((v[0]&&v[1])||(!v[2]))?1:0}
+};
+function buildTable(key){
+ const cfg=configs[key], body=document.getElementById(key+'Rows');
+ body.innerHTML='';
+ cfg.rows.forEach((vals,i)=>{
+   const tr=document.createElement('tr');
+   vals.forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});
+   const td=document.createElement('td'), sel=document.createElement('select');
+   sel.setAttribute('aria-label','F мәні '+(i+1)+'-жол');
+   sel.innerHTML='<option value="">?</option><option value="0">0</option><option value="1">1</option>';
+   sel.id=key+'-'+i;td.appendChild(sel);tr.appendChild(td);body.appendChild(tr);
+ });
+}
+Object.keys(configs).forEach(buildTable);
+function checkTable(key){
+ const cfg=configs[key];let correct=0,blank=0;
+ cfg.rows.forEach((vals,i)=>{
+  const el=document.getElementById(key+'-'+i), expected=cfg.fn(vals);
+  el.style.borderColor='';
+  if(el.value===''){blank++;el.style.borderColor='#c43e52'}
+  else if(Number(el.value)===expected){correct++;el.style.borderColor='#16865b'}
+  else el.style.borderColor='#c43e52';
+ });
+ const fb=document.getElementById(key+'Feedback');fb.className='feedback show '+(correct===cfg.rows.length?'ok':'no');
+ fb.textContent=correct===cfg.rows.length?'Керемет! Барлық жауап дұрыс: '+correct+'/'+cfg.rows.length+'.':('Дұрыс жауап: '+correct+'/'+cfg.rows.length+'. ')+(blank?'Толтырылмаған ұяшық: '+blank+'. ':'')+'Қызыл жиектелген ұяшықтарды қайта есептеп көр.';
+}
+function resetTable(key){configs[key].rows.forEach((_,i)=>{const el=document.getElementById(key+'-'+i);el.value='';el.style.borderColor=''});const fb=document.getElementById(key+'Feedback');fb.className='feedback';}
+function showSteps(key){document.getElementById(key+'Steps').classList.toggle('show')}
+function goTab(id){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id))}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>goTab(b.dataset.tab)));
+const qs=[
+ {q:'A=1, B=1 болса, A ∧ B неге тең?',opts:['0','1','2'],ans:1,why:'ЖӘНЕ амалында екі мән де 1 болғанда ғана нәтиже 1.'},
+ {q:'A=0, B=1 болса, A ∨ B неге тең?',opts:['0','1','Анықталмайды'],ans:1,why:'НЕМЕСЕ амалында кемінде бір мән 1 болса, нәтиже 1.'},
+ {q:'A=1 болса, ¬A неге тең?',opts:['0','1','A'],ans:0,why:'ЕМЕС амалы мәнді керісінше өзгертеді.'},
+ {q:'Үш айнымалысы бар ақиқат кестесінде неше жол болады?',opts:['3','6','8'],ans:2,why:'Жол саны 2ⁿ формуласы бойынша: 2³=8.'},
+ {q:'F=(A ∧ B) ∨ ¬C. A=0, B=1, C=0 болса, F неге тең?',opts:['0','1','Есептеу мүмкін емес'],ans:1,why:'A∧B=0; ¬C=1; 0∨1=1.'}
+];
+function buildQuiz(){const root=document.getElementById('quiz');root.innerHTML='';qs.forEach((q,i)=>{const d=document.createElement('div');d.className='question';d.innerHTML='<b>'+(i+1)+'. '+q.q+'</b><div>'+q.opts.map((o,j)=>'<label><input type="radio" name="q'+i+'" value="'+j+'"> '+o+'</label>').join('')+'</div><div class="small" id="why'+i+'" style="display:none;margin-top:8px"></div>';root.appendChild(d)})}
+function checkQuiz(){let score=0,answered=0;qs.forEach((q,i)=>{const picked=document.querySelector('input[name="q'+i+'"]:checked');const why=document.getElementById('why'+i);why.style.display='block';if(picked){answered++;if(Number(picked.value)===q.ans)score++;}why.textContent='Дұрыс жауап: '+q.opts[q.ans]+'. '+q.why;});const fb=document.getElementById('quizFeedback');fb.className='feedback show '+(score===qs.length?'ok':'info');fb.innerHTML='<span class="score">Нәтиже: '+score+'/'+qs.length+'</span><br>Жауап берілгені: '+answered+'/'+qs.length+'. Түсіндірмелерді оқып, қате кеткен сұрақтарды қайта қарап шық.'}
+function resetQuiz(){document.querySelectorAll('#quiz input').forEach(x=>x.checked=false);qs.forEach((_,i)=>document.getElementById('why'+i).style.display='none');document.getElementById('quizFeedback').className='feedback'}
+buildQuiz();
+</script>
+</body>
+</html>
